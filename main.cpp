@@ -1214,6 +1214,9 @@ void ip2string(char* str, byte ip[4]) {
 }
 
 void push_message(byte type, uint32_t lval, float fval, const char* sval) {
+  // temp force mqtt
+  os.options[OPTION_MQTT_ENABLE] = 255;
+
   // check if this type of event is enabled for push notification
   byte test_type = (type != NOTIFY_STATION_ON) ? type : NOTIFY_STATION_OFF;
   if(!os.options[OPTION_IFTTT_ENABLE]&test_type && !os.options[OPTION_MQTT_ENABLE]&test_type) return;
@@ -1222,6 +1225,13 @@ void push_message(byte type, uint32_t lval, float fval, const char* sval) {
 
   static char key[IFTTT_KEY_MAXSIZE];
   static char postval[TMP_BUFFER_SIZE];
+
+  DEBUG_PRINT("mqtt enabled: ");
+  DEBUG_PRINTLN(os.options[OPTION_MQTT_ENABLE]);
+  DEBUG_PRINT("ifttt enabled: ");
+  DEBUG_PRINTLN(os.options[OPTION_IFTTT_ENABLE]);
+  DEBUG_PRINT("push_message for type ");
+  DEBUG_PRINTLN(type);
 
   if (os.options[OPTION_IFTTT_ENABLE]&test_type) {
     DEBUG_PRINTLN("push_message iftt enabled");

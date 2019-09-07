@@ -501,7 +501,7 @@ typedef enum {
     #define ETHER_BUFFER_SIZE   16384
   #endif
 
-  //#define ENABLE_DEBUG 
+  #define ENABLE_DEBUG 
   #if defined(ENABLE_DEBUG)
     #if defined(ESP8266)
       #define DEBUG_BEGIN(x)   Serial.begin(x)

@@ -1470,6 +1470,9 @@ void server_change_options()
   byte max_value;
   for (byte oid=0; oid<NUM_OPTIONS; oid++) {
 
+    // temp to prevent reset
+    if (oid==OPTION_MQTT_ENABLE) continue;
+
     // skip options that cannot be set through /co command
     if (oid==OPTION_RESET || oid==OPTION_DEVICE_ENABLE ||
         oid==OPTION_FW_VERSION || oid==OPTION_HW_VERSION ||
